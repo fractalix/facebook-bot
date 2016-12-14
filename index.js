@@ -46,8 +46,7 @@ function getUserName (user) {
 }
 
 function getUserInfo(recipientId, getUserName) {
-	
-    request({
+	var response = request({
         url: 'https://graph.facebook.com/v2.6/'+ recipientId,
         qs: {
         	access_token: process.env.PAGE_ACCESS_TOKEN,
@@ -60,10 +59,9 @@ function getUserInfo(recipientId, getUserName) {
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
         } 
-        getUserName(JSON.parse(body))       	
-        return
+        
     })
-
+	console.log(response)
     
 }
 
