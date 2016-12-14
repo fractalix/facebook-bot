@@ -41,8 +41,10 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
+const user;
+
 function getUserInfo(recipientId) {
-	var user;
+	
     request({
         url: 'https://graph.facebook.com/v2.6/'+ recipientId,
         qs: {
