@@ -42,6 +42,7 @@ app.post('/webhook', function (req, res) {
 });
 
 function getUserInfo(recipientId) {
+	var user;
     request({
         url: 'https://graph.facebook.com/v2.6/'+ recipientId,
         qs: {
@@ -56,7 +57,7 @@ function getUserInfo(recipientId) {
             console.log('Error: ', response.body.error);
         } else {
         	
-        	var user = JSON.parse(body);
+        	user = JSON.parse(body);
         	console.log(typeof(user.first_name))
         	
         }
