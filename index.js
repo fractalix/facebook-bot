@@ -141,7 +141,7 @@ function sendGenericMessage(recipientId, text) {
 	        }
 	    }
 
-	    sendMessage(sender, message);
+	    sendMessage(recipientId, message);
 
 	    return true
     }
