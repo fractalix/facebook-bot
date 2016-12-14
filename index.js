@@ -57,7 +57,7 @@ function getUserInfo(recipientId) {
         } else {
         	
         	var user = body;
-        	console.log(user.first_name)
+        	console.log(user[first_name])
         	return user
         }
     });
