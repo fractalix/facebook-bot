@@ -138,7 +138,7 @@ function sendGenericMessage(sender, text) {
 	        }
 	    }
 
-	    retun true
+	    return true
     }
 
     return false
