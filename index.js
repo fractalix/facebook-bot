@@ -41,9 +41,11 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-const user = {};
+function getUserName (user) {
+	return user.first_name;
+}
 
-function getUserInfo(recipientId, callback) {
+function getUserInfo(recipientId, getUserName) {
 	
     request({
         url: 'https://graph.facebook.com/v2.6/'+ recipientId,
@@ -58,8 +60,8 @@ function getUserInfo(recipientId, callback) {
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
         } 
-        return callback(body)       	
-        
+        getUserName(JSON.parse(body))       	
+        return
     })
 
     
