@@ -28,8 +28,8 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
         	if(event.message.text === 'hola'){
-        		sendMessage(event.sender.id, {text: "Hola, en que puedo ayudarte "});
-        		getUserInfo(event.sender.id)
+        		var userFirstName = getUserInfo(event.sender.id)
+        		sendMessage(event.sender.id, {text: "Hola, en que puedo ayudarte "+ userFirstName});
         	}
             else if(!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "No se a que te refieres con: " + event.message.text});
@@ -50,12 +50,12 @@ function getUserInfo(recipientId) {
         },
         method: 'GET'
     }, function(error, response, body) {
-    	console.log(response);
-    	console.log(body);
         if (error) {
             console.log('Error getting user first name: ', error);
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
+        } else {
+        	return response.body.first_name
         }
     });
 }
