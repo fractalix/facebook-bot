@@ -27,7 +27,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-            if (!kittenMessage(event.sender.id, event.message.text)) {
+            if (!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
             }
         } else if (event.postback) {
@@ -98,4 +98,49 @@ function kittenMessage(recipientId, text) {
     
     return false;
     
-};
+}
+
+function sendGenericMessage(sender, text) {
+	text = text || "";
+    var values = text.split(' ');
+    
+    if (values[0] === 'quiero'){
+
+	    messageData = {
+	        "attachment": {
+	            "type": "template",
+	            "payload": {
+	                "template_type": "generic",
+	                "elements": [{
+	                    "title": "First card",
+	                    "subtitle": "Element #1 of an hscroll",
+	                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+	                    "buttons": [{
+	                        "type": "web_url",
+	                        "url": "https://www.messenger.com",
+	                        "title": "web url"
+	                    }, {
+	                        "type": "postback",
+	                        "title": "Si quiero uno",
+	                        "payload": "Lo siento, soy solo un bot",
+	                    }],
+	                }, {
+	                    "title": "Second card",
+	                    "subtitle": "Element #2 of an hscroll",
+	                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+	                    "buttons": [{
+	                        "type": "postback",
+	                        "title": "Postback",
+	                        "payload": "Payload for second element in a generic bubble",
+	                    }],
+	                }]
+	            }
+	        }
+	    }
+
+	    retun true
+    }
+
+    return false
+    
+}
