@@ -56,7 +56,7 @@ function getUserInfo(recipientId) {
             console.log('Error: ', response.body.error);
         } else {
         	
-        	var user = JSON.stringify(body);
+        	var user = body;
         	console.log(user)
         	return user
         }
