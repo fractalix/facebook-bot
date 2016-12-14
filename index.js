@@ -27,8 +27,11 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
+        	if(event.message.text === 'hola'){
+        		sendMessage(event.sender.id, {text: "Hola, en que puedo ayudarte "});
+        	}
             if (!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
+                sendMessage(event.sender.id, {text: "No tengo respuesta para: " + event.message.text});
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
@@ -106,7 +109,7 @@ function sendGenericMessage(sender, text) {
     
     if (values[0] === 'quiero'){
 
-	    messageData = {
+	    message = {
 	        "attachment": {
 	            "type": "template",
 	            "payload": {
@@ -137,6 +140,8 @@ function sendGenericMessage(sender, text) {
 	            }
 	        }
 	    }
+
+	    sendMessage(sender, message);
 
 	    return true
     }
