@@ -58,9 +58,11 @@ function getUserInfo(recipientId) {
         	
         	var user = JSON.parse(body);
         	console.log(typeof(user.first_name))
-        	return user
+        	
         }
-    });
+    })
+
+    return user
 }
 
 // generic function sending messages
