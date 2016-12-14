@@ -30,7 +30,7 @@ app.post('/webhook', function (req, res) {
         	if(event.message.text === 'hola'){
         		sendMessage(event.sender.id, {text: "Hola, en que puedo ayudarte "});
         	}
-            else (!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
+            else if(!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "No se a que te refieres con: " + event.message.text});
             }
         } else if (event.postback) {
