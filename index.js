@@ -103,7 +103,7 @@ function kittenMessage(recipientId, text) {
     
 }
 
-function sendGenericMessage(sender, text) {
+function sendGenericMessage(recipientId, text) {
 	text = text || "";
     var values = text.split(' ');
     
