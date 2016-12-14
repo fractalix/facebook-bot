@@ -55,7 +55,8 @@ function getUserInfo(recipientId) {
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
         } else {
-        	return response.body.first_name
+        	var user = body.first_name
+        	return user
         }
     });
 }
