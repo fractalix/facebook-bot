@@ -30,8 +30,8 @@ app.post('/webhook', function (req, res) {
         	if(event.message.text === 'hola'){
         		sendMessage(event.sender.id, {text: "Hola, en que puedo ayudarte "});
         	}
-            if (!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "No tengo respuesta para: " + event.message.text});
+            else (!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
+                sendMessage(event.sender.id, {text: "No se a que te refieres con: " + event.message.text});
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
@@ -115,26 +115,26 @@ function sendGenericMessage(sender, text) {
 	            "payload": {
 	                "template_type": "generic",
 	                "elements": [{
-	                    "title": "First card",
-	                    "subtitle": "Element #1 of an hscroll",
+	                    "title": "Oculus Rift",
+	                    "subtitle": "Oculus Rift es un casco de realidad virtual",
 	                    "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
 	                    "buttons": [{
 	                        "type": "web_url",
-	                        "url": "https://www.messenger.com",
-	                        "title": "web url"
+	                        "url": "https://www.oculus.com/rift/",
+	                        "title": "Visita el sitio"
 	                    }, {
 	                        "type": "postback",
-	                        "title": "Si quiero uno",
-	                        "payload": "Lo siento, soy solo un bot",
+	                        "title": "Quiero uno",
+	                        "payload": "User " + recipientId + " wants an Oculus Rift ",
 	                    }],
 	                }, {
-	                    "title": "Second card",
-	                    "subtitle": "Element #2 of an hscroll",
+	                    "title": "Gear VR",
+	                    "subtitle": "Gear VR se diseñó para traer la imaginación a la realidad",
 	                    "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
 	                    "buttons": [{
 	                        "type": "postback",
-	                        "title": "Postback",
-	                        "payload": "Payload for second element in a generic bubble",
+	                        "title": "Quiero uno",
+	                        "payload": "User " + recipientId + " wants a Gear VR ",
 	                    }],
 	                }]
 	            }
