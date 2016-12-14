@@ -29,6 +29,7 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
         	if(event.message.text === 'hola'){
         		sendMessage(event.sender.id, {text: "Hola, en que puedo ayudarte "});
+        		getUserInfo(event.sender.id)
         	}
             else if(!kittenMessage(event.sender.id, event.message.text) && !sendGenericMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "No se a que te refieres con: " + event.message.text});
@@ -39,6 +40,25 @@ app.post('/webhook', function (req, res) {
     }
     res.sendStatus(200);
 });
+
+function getUserInfo(recipientId) {
+    request({
+        url: 'https://graph.facebook.com/v2.6/'+ recipientId,
+        qs: {
+        	access_token: process.env.PAGE_ACCESS_TOKEN,
+        	fields: first_name,
+        },
+        method: 'GET'
+    }, function(error, response, body) {
+    	console.log(response);
+    	console.log(body);
+        if (error) {
+            console.log('Error getting user first name: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+}
 
 // generic function sending messages
 function sendMessage(recipientId, message) {
