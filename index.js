@@ -57,7 +57,7 @@ function getUserInfo(recipientId) {
         } else {
         	
         	var user = JSON.parse(body);
-        	console.log(user.first_name)
+        	console.log(typeof(user.first_name)
         	return user
         }
     });
