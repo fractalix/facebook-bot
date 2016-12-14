@@ -58,12 +58,11 @@ function getUserInfo(recipientId) {
         } else if (response.body.error) {
             console.log('Error: ', response.body.error);
         } else {
-        	
-        	user = JSON.parse(body);        	
+        	return function(body)       	
         }
     })
 
-    return user.first_name
+    
 }
 
 // generic function sending messages
