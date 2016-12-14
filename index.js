@@ -41,7 +41,7 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-const user;
+const user = {};
 
 function getUserInfo(recipientId) {
 	
